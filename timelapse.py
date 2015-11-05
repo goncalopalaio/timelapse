@@ -5,6 +5,7 @@ import datetime
 
 parser = argparse.ArgumentParser(description='Webcam timelapse utility\n Esc to exit')
 parser.add_argument('-o','--output', help='Output filename', required=False,default='output.avi')
+parser.add_argument('-w','--webcam', help='Webcam id 0-100', required=False,default=0)
 parser.add_argument('-i','--interval', help='Interval (seconds) between frames', required=False,default=1)
 parser.add_argument('-f','--fps', help='Frames per second to use in output file', required=False,default=60.0)
 parser.add_argument('-p','--preview', help='Show preview (toggle with ''p'')', action='store_true', required=False,default=False)
@@ -22,7 +23,7 @@ preview_enabled=args.preview
 cv2.namedWindow("timelapse (saving)")
 cv2.resizeWindow("timelapse (saving)",200,100)
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(int(args.webcam))
 #define codec to save video (fourcc format)
 fourcc= cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
 w=int(cap.get(cv2.cv.CV_CAP_PROP_FRAME_WIDTH ))
