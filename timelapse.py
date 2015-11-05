@@ -6,7 +6,7 @@ import datetime
 parser = argparse.ArgumentParser(description='Webcam timelapse utility\n Esc to exit')
 parser.add_argument('-o','--output', help='Output filename', required=False,default='output.avi')
 parser.add_argument('-w','--webcam', help='Webcam id 0-100', required=False,default=0)
-parser.add_argument('-i','--interval', help='Interval (seconds) between frames', required=False,default=1)
+parser.add_argument('-i','--interval', help='Interval (milliseconds) between frames', required=False,default=1000)
 parser.add_argument('-f','--fps', help='Frames per second to use in output file', required=False,default=60.0)
 parser.add_argument('-p','--preview', help='Show preview (toggle with ''p'')', action='store_true', required=False,default=False)
 parser.add_argument('-t','--timestamp', action='store_true',help='Timestamp output file', default=False)
@@ -42,7 +42,7 @@ while cap.isOpened():
 	if args.preview and preview_enabled:
 		cv2.imshow('timelapse (saving)',frame)
 
-	key_code=cv2.waitKey(int(args.interval)*1000)	
+	key_code=cv2.waitKey(int(args.interval))	
 	if key_code==27 or key_code==ord('q'):#esc
 		break
 	if key_code==ord('p'):
